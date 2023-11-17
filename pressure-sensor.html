@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmospheric Pressure Sensor Data</title>
+    <link rel="stylesheet" href="pressure-sensor.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="background-container"></div>
+
+    <div id="sensor-page">
+        <div class="sensor-box" id="pressure-sensor">
+            <h2>Atmospheric Pressure Sensor</h2>
+            <p class="sensor-description">Used to measure atmospheric pressure in hPa.</p>
+            <div class="sensor-value" id="pressure-value">Loading...</div>
+
+            <!-- Chart container -->
+            <canvas id="pressure-chart"></canvas>
+
+            <!-- Data table -->
+            <button id="download-pdf-button" class="download-button">Download PDF</button>
+            <button id="download-excel-button" class="download-button">Download Excel</button>
+
+            <table id="pressure-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be dynamically generated -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="pressure-sensor.js"></script>
+</body>
+</html>

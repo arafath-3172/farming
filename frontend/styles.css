@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transition: background-color 0.5s ease; /* Add transition for smooth color change */
+}
+
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bolder;
+    
+}
+
+.logo {
+    font-size: 1.8rem;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+    background-color: #222;
+    color: #fff;
+}
+.background-container {
+    background: url('./images/fmg_4.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity:0.9;
+     /* opacity: 0.8; Adjust the opacity to make it lighter  */
+    z-index: -1;
+}
+
+.navbar-container {
+    background-color:skyblue; /* Use rgba to set the background color with opacity */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+header {
+    text-align: center;
+    padding: 20px 0;
+   font-weight: bolder;
+    color:black;
+   
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.feature {
+    width: 300px;
+    background-color: yellow;
+    border: 2px solid black; /* Dark green color for the border */
+    border-radius: 12px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.feature:hover {
+    transform: scale(1.05);
+    background-color:green; /* Light green on hover */
+}

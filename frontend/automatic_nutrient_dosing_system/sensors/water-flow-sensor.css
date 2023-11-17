@@ -1,0 +1,83 @@
+/* Add your styling for the Water Flow sensor page */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+}
+
+.background-container {
+    background: url('path/to/farming-background-image.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+/* Add styling for download buttons */
+.download-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.download-button:hover {
+    background-color: #45a049;
+}
+
+#sensor-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.sensor-box {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #5c7430;
+    border-radius: 12px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.sensor-value {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.sensor-description {
+    color: #666;
+}
+
+#water-flow-chart {
+    margin-top: 20px;
+}
+
+#water-flow-table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#water-flow-table th, #water-flow-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#water-flow-table th {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grow Lights Automation System</title>
+    <link rel="stylesheet" href="grow-lights.css">
+</head>
+<body>
+    <div id="sensor-page">
+        <div class="sensor-box" id="bh1750-sensor">
+            <h2>BH1750 (GY-30) Sensor</h2>
+            <p class="sensor-description">Measures ambient light intensity.</p>
+            <div class="sensor-value" id="bh1750-value">Loading...</div>
+        </div>
+
+        <div class="sensor-box" id="ldr-sensor">
+            <h2>LDR Sensor</h2>
+            <p class="sensor-description">Measures the resistance of the light-dependent resistor.</p>
+            <div class="sensor-value" id="ldr-value">Loading...</div>
+        </div>
+    </div>
+
+    <script src="grow-lights.js"></script>
+</body>
+</html>

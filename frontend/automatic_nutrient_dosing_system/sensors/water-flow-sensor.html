@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Flow Sensor Data</title>
+    <link rel="stylesheet" href="water-flow-sensor.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="background-container"></div>
+
+    <div id="sensor-page">
+        <div class="sensor-box" id="water-flow-sensor">
+            <h2>Water Flow Sensor</h2>
+            <p class="sensor-description">Measures the quantity of water flown through it.</p>
+            <div class="sensor-value" id="water-flow-value">Loading...</div>
+
+            <!-- Chart container -->
+            <canvas id="water-flow-chart"></canvas>
+
+            <!-- Data table -->
+            <button id="download-pdf-button" class="download-button">Download PDF</button>
+            <button id="download-excel-button" class="download-button">Download Excel</button>
+
+            <table id="water-flow-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be dynamically generated -->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="water-flow-sensor.js"></script>
+</body>
+</html>
