@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let dataPast1Hour = generateRandomData(60);
 
     displayDataInTable(dataPast1Hour, pressureTableBodyElement);
-
     const updateChart = (data) => {
         const timestamps = data.map(entry => entry.time);
         const values = data.map(entry => entry.value);

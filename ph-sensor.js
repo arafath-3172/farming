@@ -92,25 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadExcelButton.addEventListener('click', () => {
         downloadExcel(dataPast1Hour);
     });
-    const sendPhDataToBackend = async (time, value) => {
-        try {
-            const response = await fetch('http://localhost:3000/api/savePhData', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ time, value }),
-            });
-
-            if (response.ok) {
-                console.log('pH Data saved successfully');
-            } else {
-                console.error('Failed to save pH Data');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
 });
 
 // Function to display data in the table
@@ -130,7 +111,7 @@ const displayDataInTable = (data, tableBody) => {
 // Function to download data in PDF format
 const downloadPdf = (data) => {
     const pdf = new jsPDF();
-    pdf.autoTable({ html: '#ph-table' }); // Use the HTML table for PDF generation
+    pdf.autoTable({ html: '#ph-table' });
     pdf.save('ph_data.pdf');
 };
 
@@ -141,3 +122,30 @@ const downloadExcel = (data) => {
     XLSX.utils.book_append_sheet(wb, ws, 'pH Data');
     XLSX.writeFile(wb, 'ph_data.xlsx');
 };
+
+
+
+  // API endpoint
+  const apiUrl = 'https://example.com/api';
+  
+  // Create a FormData object and append key-value pairs to it
+  const formData = new FormData();
+  data.forEach(pair => {
+    formData.append(pair.key, pair.value);
+  });
+  
+  // Make a fetch request with the FormData
+  fetch(apiUrl, {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data
+      console.log('Response from the API:', data);
+    })
+    .catch(error => {
+      // Handle errors
+      console.error('Error:', error);
+    });
+  
