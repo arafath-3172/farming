@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const tdsValueElement = document.getElementById('tds-value');
-    const tdsChartElement = document.getElementById('tds-chart');
-    const tdsTableBodyElement = document.querySelector('#tds-table tbody');
+    const ldrValueElement = document.getElementById('ldr-value');
+    const ldrChartElement = document.getElementById('ldr-chart');
+    const ldrTableBodyElement = document.querySelector('#ldr-table tbody');
 
     // Function to generate a random value within a given range
     const generateRandomValue = (min, max) => {
@@ -15,41 +15,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = minutes; i >= 0; i--) {
             const timestamp = new Date(currentTime.getTime() - i * 60 * 1000);
-            const value = generateRandomValue(0, 1000); // Adjust the range as needed
+            const value = generateRandomValue(0, 10000); // Adjust the range as needed
             data.push({ time: timestamp, value: parseFloat(value) });
-
         }
 
         return data.filter((entry, index) => index % (interval / 10) === 0); // Filter data for every 10 minutes
     };
 
-    // Update sensor value with random data (replace this with actual data)
-    tdsValueElement.textContent = generateRandomValue(0, 1000);
+    // Update LDR sensor value with random data (replace this with actual data)
+    ldrValueElement.textContent = generateRandomValue(0, 10000);
 
     // Generate random data for the past 1 hour with a data point every 10 minutes
-    let dataPast1Hour = generateRandomData(60);
+    let ldrDataPast1Hour = generateRandomData(60);
 
-    // Display initial data in the table
-    displayDataInTable(dataPast1Hour, tdsTableBodyElement);
+    // Display initial data in the LDR table
+    displayDataInTable(ldrDataPast1Hour, ldrTableBodyElement);
 
-    // Create and update the chart
-    const updateChart = (data) => {
+    // Create and update the LDR chart
+    const updateLdrChart = (data) => {
         const timestamps = data.map(entry => entry.time);
         const values = data.map(entry => entry.value);
 
-        if (window.tdsChart) {
-            window.tdsChart.destroy(); // Destroy the existing chart if it exists
+        if (window.ldrChart) {
+            window.ldrChart.destroy(); // Destroy the existing chart if it exists
         }
 
-        const ctx = tdsChartElement.getContext('2d');
-        window.tdsChart = new Chart(ctx, {
+        const ctx = ldrChartElement.getContext('2d');
+        window.ldrChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timestamps.map(time => time.toLocaleTimeString()),
                 datasets: [{
-                    label: 'TDS Data',
+                    label: 'LDR Data',
                     data: values,
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
                     fill: false,
                     lineTension: 0,
@@ -63,35 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     y: {
                         min: 0,
-                        max: 1000,
+                        max: 10000,
                     },
                 },
             },
         });
     };
 
-    updateChart(dataPast1Hour);
+    updateLdrChart(ldrDataPast1Hour);
 
-    // Update the chart every 10 seconds
+    // Update the LDR chart every 10 seconds
     setInterval(() => {
         // Generate new data for the past 1 hour with a data point every 10 minutes
-        dataPast1Hour = generateRandomData(60);
-        displayDataInTable(dataPast1Hour, tdsTableBodyElement);
-        updateChart(dataPast1Hour);
+        ldrDataPast1Hour = generateRandomData(60);
+        displayDataInTable(ldrDataPast1Hour, ldrTableBodyElement);
+        updateLdrChart(ldrDataPast1Hour);
     }, 10000); // 10000 milliseconds = 10 seconds
 
     // Download buttons
-    const downloadPdfButton = document.getElementById('download-pdf-button');
-    const downloadExcelButton = document.getElementById('download-excel-button');
+    const downloadPdfButtonLdr = document.getElementById('download-pdf-button-ldr');
+    const downloadExcelButtonLdr = document.getElementById('download-excel-button-ldr');
 
     // Event listener for PDF download
-    downloadPdfButton.addEventListener('click', () => {
-        downloadPdf(dataPast1Hour);
+    downloadPdfButtonLdr.addEventListener('click', () => {
+        downloadPdf(ldrDataPast1Hour, 'ldr_data.pdf');
     });
 
     // Event listener for Excel download
-    downloadExcelButton.addEventListener('click', () => {
-        downloadExcel(dataPast1Hour);
+    downloadExcelButtonLdr.addEventListener('click', () => {
+        downloadExcel(ldrDataPast1Hour, 'ldr_data.xlsx');
     });
 });
 
@@ -110,16 +109,16 @@ const displayDataInTable = (data, tableBody) => {
 };
 
 // Function to download data in PDF format
-const downloadPdf = (data) => {
+const downloadPdf = (data, fileName) => {
     const pdf = new jsPDF();
-    pdf.autoTable({ html: '#tds-table' });
-    pdf.save('tds_data.pdf');
+    pdf.autoTable({ html: '#ldr-table' }); // Use the HTML table for PDF generation
+    pdf.save(fileName);
 };
 
 // Function to download data in Excel format
-const downloadExcel = (data) => {
+const downloadExcel = (data, fileName) => {
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'TDS Data');
-    XLSX.writeFile(wb, 'tds_data.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, 'LDR Data');
+    XLSX.writeFile(wb, fileName);
 };

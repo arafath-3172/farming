@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const DataModel = require('./models/dataModel');
+const cors = require('cors'); // Import the 'cors' middleware
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/capstone")
@@ -20,17 +21,50 @@ mongoose
   
   // Middleware to parse incoming form data
   app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cors());
+
+
+  const formDataSchema = new mongoose.Schema({
+    timestamp: { type: Date, default: Date.now },
+    value: Number,
+  });
   
-  // Route to handle the incoming data
-  app.post('/api', (req, res) => {
+  // Create a Mongoose model based on the schema
+  const FormDataModel = mongoose.model('FormData', formDataSchema);
+  
+  // Middleware to parse incoming JSON data
+  app.use(bodyParser.json());
+  
+
+  app.get('/api/last20', async (req, res) => {
+    try {
+      const last20Data = await DataModel.find().sort({ timestamp: -1 }).limit(20);
+      res.json(last20Data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  
+  // Route to handle POST requests containing form data
+  app.post('/api', async (req, res) => {
     // Access the form data from req.body
     const formData = req.body;
+    console.log("working")
+    try {
+      // Create a new document using the FormDataModel
+      const newFormData = new FormDataModel(formData);
   
-    // Process the formData as needed
-    console.log('Received data:', formData);
+      // Save the document to the MongoDB database
+      await newFormData.save();
   
-    // Send a response (you can customize this based on your needs)
-    res.json({ message: 'Data received successfully' });
+      // Send a response
+      res.json({ message: 'Data received and saved successfully' });
+    } catch (error) {
+      console.error('Error saving data to MongoDB:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   });
   
   // Start the Express server

@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Update sensor values with random data (replace this with actual data)
-    bh1750ValueElement.textContent = generateRandomValue(0.0001, 107527);
+    bh1750ValueElement.textContent = generateRandomValue(0, 10000);
     ldrValueElement.textContent = generateRandomValue(0, 1023);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+
+    // Event listener for "View Sensor's Data" buttons
+    const viewSensorDataButtons = document.querySelectorAll('.view-sensor-data-button');
+    viewSensorDataButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const sensorName = button.dataset.sensor;
+            window.location.href = `${sensorName}.html`;
+        });
+    });
 });

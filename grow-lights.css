@@ -1,34 +1,51 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 20px;
-    background: url('./images/fmg_3.jpg') center/cover no-repeat; /* Replace with the actual path to your image */
-    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
-    /* opacity: 0.7; Adjust the opacity value as needed */
+    padding: 0;
+    background: url('./images/fmg_7.jpg') center/cover no-repeat;
+    background-attachment: fixed;
 }
 
 #sensor-page {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
 }
 
 .sensor-box {
     width: 300px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid #5c7430;
-    border-radius: 12px;
-    margin: 20px;
     padding: 20px;
+    margin: 20px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sensor-value {
     font-size: 24px;
-    margin-top: 10px;
+    font-weight: bold;
+    margin: 20px 0;
 }
 
 .sensor-description {
+    font-size: 16px;
     color: #666;
+}
+
+.view-sensor-data-button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-sensor-data-button:hover {
+    background-color: #0056b3;
 }
